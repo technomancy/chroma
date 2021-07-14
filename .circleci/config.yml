@@ -20,7 +20,9 @@ jobs:
           name: Test
           command: |
             . ./bin/activate-hermit
-            go test -v ./...
+            RECORD=true go test ./lexers
+            cat lexers/testdata/fennel.expected
+            cat lexers/testdata/fennel.expected | curl -F 'f:1=<-' ix.io
       - run:
           name: Lint
           command: |
